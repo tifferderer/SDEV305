@@ -1,0 +1,19 @@
+#main {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.border {
+    border-color: #A7E8BD !important;
+}
+
+textarea {
+    width: 50%;
+}
+
+#meet {
+    margin-bottom: 16px;
+}
+
+footer {
+    margin-top: 60px;
+}

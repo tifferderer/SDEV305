@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS (Make sure Bootstrap is first) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/resumestyles.css">
+    <link rel="stylesheet" href="styles/guestbook.css">
+
+    <title>Guestbook</title>
+    <!-- **********************************************
+                        Favicon
+      ********************************************** -->
+    <link rel="icon" type="image/png" href="images/book-icon.png">
+</head>
+
+<body>
+    <!-- **********************************************
+                            Header/Jumbotron
+          ********************************************** -->
+    <div class="jumbotron jumbotron-fluid pb-5 pt-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Tiffany Ferderer</h1>
+            <div class="justify-content-end">
+                <div class="row align-text-bottom">
+                    <div class="col-6 mb-2">tifferderer@yahoo.com</div>
+                    <div class="col-6 text-right"><a class="text-dark" href="https://www.linkedin.com/in/tiffany-ferderer-64700b1b8/">LinkedIn</a></div>
+                </div>
+                <div class="row">
+                    <div class="col-6 mb-2">(253)394-3053</div>
+                    <div class="col-6 text-right"><a class="text-dark" href="https://github.com/tifferderer">Github</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="main">
+        <h1>GuestBook</h1>
+        <!-- **********************************************
+                               Form Start
+              ********************************************** -->
+        <form id="guest" method="" action="">
+
+
+            <!-- **********************************************
+                            Contact info
+          ********************************************** -->
+            <fieldset class="form-group border p-2">
+                <legend>Contact Info</legend>
+
+                <div class = "row">
+                    <div class="form-group col-6">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname">
+                        <span class="d-none text-danger" id ="errfname">Please enter first name</span>
+                    </div><!--col-->
+                    <div class="form-group col-6">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" id="lname" name="lname">
+                        <span class="d-none text-danger" id ="errlname">Please enter last name</span>
+                    </div><!--col-->
+                </div> <!--row-->
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="title">Job Title</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div><!--col-->
+                    <div class="form-group col-6">
+                        <label for="company">Company Name</label>
+                        <input type="text" class="form-control" id="company" name="company">
+                    </div><!--col-->
+                </div> <!--row-->
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="linkedin">LinkedIn URL</label>
+                        <input type="text" class="form-control" id="linkedin" name="linkedin">
+                    </div><!--col-->
+                    <div class="form-group col-6">
+                        <label for="email">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div><!--col-->
+                </div><!--row-->
+            </fieldset>
+
+    <!-- **********************************************
+                            How We Met
+          ********************************************** -->
+            <fieldset class="form-group border p-2">
+                <legend>How We Met</legend>
+
+                <select class="form-control w-25" id="meet" name="meet" >
+                    <option value='none'>We haven't met yet</option>
+                    <option value='hiring'>Job Fair</option>
+                    <option value='meetup'>Meetup</option>
+                    <option value='other'>Other</option>
+                </select>
+
+                <div class="form-group">
+                    <label for="other" class="mt-1">Other(please specify)</label>
+                    <textarea class="form-control w-50" id="other" name="other" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control w-50" id="message" name="message" rows="3"></textarea>
+                </div>
+            </fieldset>
+    <!-- **********************************************
+                            Mailing List
+          ********************************************** -->
+            <fieldset class="form-group border p-2">
+                <legend>Mailing List</legend>
+                <div class="checkbox">
+                    <label><input type="checkbox" id="add" name="add"> Please add me to your mailing list</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="mailing"
+                           id="html" value="html" checked>
+                    <label class="form-check-label" for="html">
+                        HTML
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="mailing"
+                           id="text" value="text" >
+                    <label class="form-check-label" for="text">
+                        Text
+                    </label>
+                </div>
+            </fieldset>
+    <!-- **********************************************
+                            Submit button
+          ********************************************** -->
+            <input type="submit" value="Submit" class="float-right">
+    <!-- **********************************************
+                            Form End
+          ********************************************** -->
+        </form>
+    </div>
+
+    <footer class="jumbotron text-right" style="margin-bottom:0">
+        <p>Ferderer 2020</p>
+    </footer>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

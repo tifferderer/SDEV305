@@ -1,0 +1,16 @@
+.jumbotron {
+    background-color: #A7E8BD;
+}
+
+/* Mobile & Tablet Styles
+ */
+
+@media screen and (max-width: 576px) {
+    .img-fluid {
+        max-width: 50%;
+    }
+
+    #skills{
+        display:none;
+    }
+}
