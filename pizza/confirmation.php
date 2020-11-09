@@ -1,30 +1,19 @@
 
 <?php
 /* confirmation.php
- * Gets data from pizza/index.html
+ * Gets data from pizza/index.php
  * 10/26/2020
  */
 
 // Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
+//header file
+include ('includes/head.html');
+require ('includes/dbcreds.php');
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/styles.css">
-    <title>Poppa's Pizza</title>
-
-    <!--favicon-->
-    <link rel="icon" type="image/jpg" href="images/pizza-icon.jpg">
-</head>
 <body>
 
 <pre class="container" id="main">
@@ -41,24 +30,56 @@ error_reporting(E_ALL);
         $address = $_POST['address'];
         $size = $_POST['size'];
         $toppings = implode(", ", $_POST['toppings']);
-    ?>
+        $method = $_POST['method'];
+        $fromName = $fname . " " . $lname;
+        $fromEmail = "tifferderer@yahoo.com";
 
+    //calculate pizza price
+    $toppingsCount = count($_POST['toppings']);
+    define('TAX_RATE', 0.1);
+    if($size == 'small') {
+        $price = 10.0;
+    } elseif($size == 'medium') {
+        $price = 15.0;
+    } elseif ($size =='large') {
+        $price = 20.0;
+    } else {
+        $price = 25.0;
+    }
+
+    //Add 50 cents to the price
+    $price += $toppingsCount * 1.5;
+
+    //add sales tax to the price
+    $price += $price *TAX_RATE;
+    //format price
+    $price = number_format($price, 2);
+
+    //save order to database
+    $sql = "INSERT INTO pizza(`fname`, `lname`, `address`, `size`, `toppings`, `method`, `price`) VALUES
+ ('$fname', '$lname', '$address', '$size', '$toppings', '$method', '$price')";
+
+    $success = mysqli_query($cnxn, $sql);
+    if(!$success) {
+        echo "<p>Sorry something went wrong </p>";
+        return;
+    }
+  ?>
     <h1>Thank you for your order, <?php echo $fname; ?>!</h1>
     <h2>Order Summary</h2>
-    <p>Name: <?php echo $fname . " " . $lname; ?></p>
-    <p>Name: <?php echo "$fname $lname"; ?></p>
     <?php
     //Print order summary
         echo "<p>Name:  $fname $lname</p>";
         echo "<p>Address: $address </p>";
         echo "<p>Size: $size</p>";
         echo "<p>Toppings: $toppings</p>";
-
+        echo "<p>Method: $method</p>";
+        echo "<p>Price: $$price</p>";
         //send email
-        $fromName = "Tiffany";
-        $fromEmail = "tifferderer@yahoo.com";
+        $fromName = "";
 
-        $to = "tifferderer@yahoo.com";
+
+        $to = "";
         $subject = "Pizza Order Placed";
         $message = "Order from $fname $lname \r\n";
         $headers = "Name: $fromName <$fromEmail>";
