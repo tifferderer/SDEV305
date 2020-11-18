@@ -5,7 +5,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //files
-require ('includes/dbcreds.php')
+require($_SERVER['HOME'] . '/dbcreds.php');
+require ('includes/guestFunctions.php');
 ?>
 
 <!DOCTYPE html>
@@ -47,24 +48,96 @@ require ('includes/dbcreds.php')
 <div class="container vh-100" id="main">
 
     <?php
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $title = $_POST['title'];
-    $company = $_POST['company'];
-    $linkedin = $_POST['linkedin'];
-    $email = $_POST['email'];
-    $meet = $_POST['meet'];
-    $other = $_POST['other'];
-    $message = $_POST['message'];
+    $isValid = true;
 
+    //Name validation
+    if(validInfo($_POST['fname'])) {
+        $fname = $_POST['fname'];
+    }
+    else {
+        echo "<p>Invalid first name</p>";
+        $isValid = false;
+
+    }
+    if(validInfo($_POST['lname'])) {
+        $lname = $_POST['lname'];
+    }
+    else {
+        echo "<p>Invalid last name</p>";
+        $isValid = false;
+    }
+
+    //Validate LinkedIn
+    $linkedin = $_POST['linkedin'];
+    if(validInfo($_POST['email'])) {
+        if (!((substr($linkedin, 0, 4) == "http") && (substr($linkedin, -4) == ".com"))) {
+            echo "<p> Please enter a valid LinkedIn URL.</p>";
+            $isValid = false;
+        }
+    }
+
+    //Validate email
+    $email = $_POST['email'];
+    if(validInfo($_POST['email'])) {
+        if(!((strpos($email, "@")) AND (strpos($email, '.')))){
+            echo "<p> Please enter a valid email.</p>";
+            $isValid = false;
+        }
+    }
+
+    //Validate How We Met
+    if(isset($_POST['meet'])) {
+        $meet = $_POST['meet'];
+        if(!validGreet($meet)) {
+            echo "<p> Please enter where we met. </p>";
+            $isValid = false;
+        }
+        if($meet == 'other') {
+            if(validInfo($_POST['other'])) {
+                $other = $_POST['other'];
+            }
+            else {
+                echo "<p>Please fill out how we met.</p>";
+                $isValid = false;
+            }
+        }
+    }
+
+    //Check the mailing list
     if(isset($_POST['add_mail'])) {
         $add_mail = "Yes";
+        if(!validInfo($email)) {
+            echo "<p>Please enter an email address.</p>";
+            $isValid = false;
+        }
     }
     else {
         $add_mail = "No";
     }
 
+    $title = $_POST['title'];
+    $company = $_POST['company'];
+    $other = $_POST['other'];
+    $message = $_POST['message'];
     $mailing = $_POST['mailing'];
+
+    if(!$isValid) {
+        echo "<p> Please go back and review.</p>";
+        return;
+    }
+
+    //Prevent SQL Injection
+    $fname = mysqli_real_escape_string($cnxn, $fname);
+    $lname = mysqli_real_escape_string($cnxn, $lname);
+    $linkedin = mysqli_real_escape_string($cnxn, $linkedin);
+    $email = mysqli_real_escape_string($cnxn, $email);
+    $title = mysqli_real_escape_string($cnxn, $title);
+    $company = mysqli_real_escape_string($cnxn, $company);
+    $meet = mysqli_real_escape_string($cnxn, $meet);
+    $other = mysqli_real_escape_string($cnxn, $other);
+    $message = mysqli_real_escape_string($cnxn, $message);
+    $add_mail = mysqli_real_escape_string($cnxn, $add_mail);
+    $mailing = mysqli_real_escape_string($cnxn, $mailing);
 
 //    //save order to database
     $sql = "INSERT INTO guestbook(`fname`, `lname`, `title`, `company`, `linkedin`, `email`, `meet`,`other_meet`, `message`, `add_mail`, `mailing`) VALUES
@@ -77,6 +150,18 @@ require ('includes/dbcreds.php')
     }
     ?>
     <h1>Thank You For Your Inquiry</h1>
+
+     <?php
+    //Print order summary
+        echo "<p>Name:  $fname $lname</p>";
+        echo "<p>Title: $title </p>";
+        echo "<p>Company: $company</p>";
+        echo "<p>LinkedIn URL: $linkedin</p>";
+        echo "<p>Email: $email</p>";
+        echo "<p>How we met: $meet $other</p>";
+        echo "<p>Message: $message</p>";
+        echo "<p>Add to the mailing list: $add_mail</p>";
+        ?>
 
 </div>
 

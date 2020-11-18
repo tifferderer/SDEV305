@@ -9,7 +9,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include ('includes/dbcreds.php');
+require($_SERVER['HOME'] . '/dbcreds.php');
 
 ?>
 
@@ -69,7 +69,7 @@ include ('includes/dbcreds.php');
                     $message = $row['message'];
                     $add_mail = $row['add_mail'];
                     $mailing = $row['mailing'];
-                    $guest_date = date("M d, Y g:i a",strtotime( $row['guest_date']));
+                    $guest_date = date("M d, Y g:i a",strtotime( $row['guest_date']. "- 3 hours"));
 
                     echo "<tr>";
                     echo"<td>$guest_id</td>

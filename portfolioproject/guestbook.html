@@ -39,8 +39,7 @@
         <!-- **********************************************
                                Form Start
               ********************************************** -->
-        <form id="guest" method="" action="">
-
+        <form id="guest" method="post" action="confirmation.php">
 
             <!-- **********************************************
                             Contact info
@@ -74,10 +73,12 @@
                     <div class="form-group col-6">
                         <label for="linkedin">LinkedIn URL</label>
                         <input type="text" class="form-control" id="linkedin" name="linkedin">
+                        <span class="d-none text-danger" id ="errlinkedin">LinkedIn</span>
                     </div><!--col-->
                     <div class="form-group col-6">
                         <label for="email">Email Address</label>
                         <input type="text" class="form-control" id="email" name="email">
+                        <span class="d-none text-danger" id ="erremail">Email</span>
                     </div><!--col-->
                 </div><!--row-->
             </fieldset>
@@ -88,16 +89,20 @@
             <fieldset class="form-group border p-2">
                 <legend>How We Met</legend>
 
+                <span class="d-none text-danger" id ="errmeet">Meet</span>
                 <select class="form-control w-25" id="meet" name="meet" >
-                    <option value='none'>We haven't met yet</option>
+                    <option value='none'>Where did we meet?</option>
+                    <option value='new'>We haven't met yet</option>
                     <option value='hiring'>Job Fair</option>
                     <option value='meetup'>Meetup</option>
                     <option value='other'>Other</option>
                 </select>
 
+
                 <div class="form-group">
                     <label for="other" class="mt-1">Other(please specify)</label>
                     <textarea class="form-control w-50" id="other" name="other" rows="2"></textarea>
+                    <span class="d-none text-danger" id ="errother">Other</span>
                 </div>
 
                 <div class="form-group">
@@ -111,7 +116,7 @@
             <fieldset class="form-group border p-2">
                 <legend>Mailing List</legend>
                 <div class="checkbox">
-                    <label><input type="checkbox" id="add" name="add"> Please add me to your mailing list</label>
+                    <label><input type="checkbox" id="add_mail" name="add_mail"> Please add me to your mailing list</label>
                 </div>
 
                 <div class="form-check">
@@ -139,13 +144,28 @@
         </form>
     </div>
 
-    <footer class="jumbotron text-right" style="margin-bottom:0">
-        <p>Ferderer 2020</p>
+    <footer class="jumbotron jumbotron-fluid text-right" style="margin-bottom:0">
+        <nav class="nav d-inline">
+            <div class="navbar-collapse justify-content-end mr-5">
+                <ul class="navbar-nav text-right">
+                    <li class="nav-item inline float-right">
+                        <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/resume.html">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/guestbook.html">Guestbook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/admin.php">Directory</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </footer>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!--<script src="scripts/validation.js"></script> -->
 </body>
 </html>
