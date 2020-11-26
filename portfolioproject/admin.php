@@ -9,6 +9,17 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
+
+if(!isset($_SESSION['loggedin'])) {
+
+    //store page currently on in the session
+    $_SESSION['page'] = $_SERVER['SCRIPT_URI'];
+
+    //redirect to login
+    header('location: login.php');
+}
+
 require($_SERVER['HOME'] . '/dbcreds.php');
 
 ?>
@@ -92,7 +103,7 @@ require($_SERVER['HOME'] . '/dbcreds.php');
 
             </table>
         </div>
-    </body>
+
 
     <footer class="jumbotron jumbotron-fluid text-right" style="margin-bottom:0">
             <nav class="nav d-inline">
@@ -105,7 +116,7 @@ require($_SERVER['HOME'] . '/dbcreds.php');
                             <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/guestbook.html">Guestbook</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/admin.php">Directory</a>
+                            <a class="nav-link text-dark" href="http://tferderer.greenriverdev.com/SDEV305/portfolioproject/logout.php">Log Out</a>
                         </li>
                     </ul>
                 </div>

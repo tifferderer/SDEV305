@@ -70,7 +70,7 @@ require ('includes/guestFunctions.php');
     //Validate LinkedIn
     $linkedin = $_POST['linkedin'];
     if(validInfo($_POST['email'])) {
-        if (!((substr($linkedin, 0, 4) == "http") && (substr($linkedin, -4) == ".com"))) {
+        if (!((substr($linkedin, 0, 24) == "https://www.linkedin.com"))) {
             echo "<p> Please enter a valid LinkedIn URL.</p>";
             $isValid = false;
         }
